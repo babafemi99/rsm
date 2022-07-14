@@ -7,19 +7,19 @@ import (
 )
 
 type UserModel struct {
-	Id        uuid.UUID `json:"id" validator:"required"`
-	FirstName string    `json:"firstName" validator:"required"`
-	LastName  string    `json:"lastName" validator:"required"`
-	Email     string    `json:"email" validator:"required"`
-	Password  string    `json:"password" validator:"required,min=8,alphanum"`
+	Id        uuid.UUID `json:"id" validate:"required"`
+	FirstName string    `json:"firstName" validate:"required"`
+	LastName  string    `json:"lastName" validate:"required"`
+	Email     string    `json:"email" validate:"required,email"`
+	Password  string    `json:"password" validate:"required,min=8,alphanum"`
 	createdAt time.Time `json:"created_at"`
 }
 
 type UserAccessModel struct {
-	Id        uuid.UUID `json:"id" validator:"required"`
-	FirstName string    `json:"firstName" validator:"required"`
-	LastName  string    `json:"lastName" validator:"required"`
-	Email     string    `json:"email" validator:"required"`
+	Id        uuid.UUID `json:"id" validate:"required"`
+	FirstName string    `json:"firstName" validate:"required"`
+	LastName  string    `json:"lastName" validate:"required"`
+	Email     string    `json:"email" validate:"required"`
 }
 
 type UserLoginRequest struct {
