@@ -10,5 +10,9 @@ createdb:
 dropdb:
 	docker exec -it rsm dropdb rsmstore -U postgres
 
+test:
+	go test -v -cover ./...
+
+
 
 .PHONY: postgres startdb
