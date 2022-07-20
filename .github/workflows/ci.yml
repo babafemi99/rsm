@@ -12,36 +12,21 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
 
-
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: rsmstore
 
     services:
-#      postgres:
-#        image: postgres:12
-#        env:
-#          POSTGRES_PASSWORD: mysecretpassword
-#          POSTGRES_DB: rsmstore
-#
-#        ports: ['5432:5432']
-#        # Set health checks to wait until postgres has started
-#
-#        options: >-
-#          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
-    postgres:
-      image: postgres:11-alpine
-      env:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: mysecretpassword
-        POSTGRES_DB: postgres
-      ports:
-        - 5432:5432
-      options: >-
-        --health-cmd pg_isready
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v3
