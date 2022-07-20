@@ -19,6 +19,5 @@ jobs:
         with:
           go-version: 1.18
 
-
       - name: Test
         run: make test

@@ -1,4 +1,4 @@
-CREATE TABLE "User" (
+CREATE TABLE IF NOT EXISTS "User" (
   "id" uuid PRIMARY KEY,
   "firstname" varchar NOT NULL,
   "lastname" varchar NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE "User" (
   "created_at" timestamptz NOT NULL
 );
 
-CREATE TABLE "Restaurants" (
+CREATE TABLE IF NOT EXISTS "Restaurants" (
   "id" uuid PRIMARY KEY,
   "name" varchar NOT NULL,
   "location" varchar,
@@ -15,7 +15,7 @@ CREATE TABLE "Restaurants" (
   "status" boolean NOT NULL
 );
 
-CREATE TABLE "Menu" (
+CREATE TABLE IF NOT EXISTS "Menu" (
   "id" bigserial PRIMARY KEY NOT NULL,
   "restaurant_id" uuid NOT NULL,
   "item" varchar NOT NULL,

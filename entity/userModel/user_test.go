@@ -81,7 +81,7 @@ func TestUserModel_WrongValidationInput(t *testing.T) {
 				LastName:  tt.fields.LastName,
 				Email:     tt.fields.Email,
 				Password:  tt.fields.Password,
-				createdAt: tt.fields.createdAt,
+				CreatedAt: tt.fields.createdAt,
 			}
 
 			err := u.ValidateInput()
