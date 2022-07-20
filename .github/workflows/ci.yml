@@ -23,9 +23,9 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: root
+#          POSTGRES_USER: root
           POSTGRES_PASSWORD: mysecretpassword
-          POSTGRES_DB: rsmstore
+#          POSTGRES_DB: rsmstore
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_ready
