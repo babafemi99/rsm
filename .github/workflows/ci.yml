@@ -25,10 +25,6 @@ jobs:
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: mysecretpassword
-<<<<<<< HEAD
-=======
-          POSTGRES_USER: postgres
->>>>>>> origin/main
           POSTGRES_DB: rsmstore
         # Set health checks to wait until postgres has started
         options: >-
