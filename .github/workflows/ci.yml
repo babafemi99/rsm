@@ -16,9 +16,9 @@ jobs:
       postgres:
         image: postgres:14-alpine
         env:
-          POSTGRES_USER: root
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: mysecretpassword
-          POSTGRES_DB: rsm
+          POSTGRES_DB: rsmstore
         ports:
           - 5432:5432
         options: >-
