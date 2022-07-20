@@ -21,7 +21,7 @@ jobs:
         image: postgres:12
         # Provide the password for postgres
         ports:
-          -5432:5432
+          - 5432:5432
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: mysecretpassword
