@@ -8,30 +8,40 @@ on:
 
 jobs:
 
-
-
   test:
     name: Test
     runs-on: ubuntu-latest
 
+
+
     services:
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: postgres:12
-        # Provide the password for postgres
-        ports:
-          - 5432:5432
-        env:
-#          POSTGRES_USER: root
-          POSTGRES_PASSWORD: mysecretpassword
+#      postgres:
+#        image: postgres:12
+#        env:
+#          POSTGRES_PASSWORD: mysecretpassword
 #          POSTGRES_DB: rsmstore
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_ready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+#
+#        ports: ['5432:5432']
+#        # Set health checks to wait until postgres has started
+#
+#        options: >-
+#          --health-cmd pg_isready
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 5
+    postgres:
+      image: postgres:11-alpine
+      env:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: mysecretpassword
+        POSTGRES_DB: postgres
+      ports:
+        - 5432:5432
+      options: >-
+        --health-cmd pg_isready
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
 
     steps:
       - uses: actions/checkout@v3
