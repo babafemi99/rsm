@@ -16,7 +16,7 @@ type ServiceInterface interface {
 	SignUp(model *userModel.UserModel) (*userModel.UserAccessModel, error)
 	GetByEmail(email string) (*userModel.UserAccessModel, error)
 	GetByUserId(id uuid.UUID) (*userModel.UserAccessModel, error)
-	DeleteUser()
+	DeleteUser(id uuid.UUID) error
 	GetAllUsers()
 }
 
@@ -96,9 +96,8 @@ func (u *userService) GetByUserId(id uuid.UUID) (*userModel.UserAccessModel, err
 	return &userAccess, nil
 }
 
-func (u *userService) DeleteUser() {
-	//TODO implement me
-	panic("implement me")
+func (u *userService) DeleteUser(id uuid.UUID) error {
+	return u.repo.Delete(id)
 }
 
 func (u *userService) GetAllUsers() {

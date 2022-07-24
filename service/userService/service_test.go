@@ -34,8 +34,8 @@ func (m *MockRepository) Update(user *userModel.UserModel) (*userModel.UserModel
 }
 
 func (m *MockRepository) Delete(id uuid.UUID) error {
-	args := m.Called()
-	return args.Error(1)
+	args := m.Called(id)
+	return args.Error(0)
 }
 
 func (m *MockRepository) FindById(id uuid.UUID) (*userModel.UserAccessModel, error) {
@@ -401,6 +401,53 @@ func Test_userService_SignUp(t *testing.T) {
 			got, _ := u.SignUp(tt.args.model)
 
 			assert.Same(t, tt.want, got, "SignUp(%v)", tt.args.model)
+		})
+	}
+}
+
+func Test_userService_DeleteUser(t *testing.T) {
+	id := uuid.New()
+
+	mockRepo := new(MockRepository)
+	mockPass := new(mockPasswordUtils)
+	mockRepo.On("Delete", id).Return(nil)
+
+	type fields struct {
+		log    *logrus.Logger
+		repo   userRepo.RepoInterface
+		crypto passwordUtils.PasswordService
+	}
+	type args struct {
+		id uuid.UUID
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		wantErr error
+	}{
+		{
+			name: "delete user",
+			fields: fields{
+				log:    log,
+				repo:   mockRepo,
+				crypto: mockPass,
+			},
+			args: args{
+				id: id,
+			},
+			wantErr: nil,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			u := &userService{
+				log:    tt.fields.log,
+				repo:   tt.fields.repo,
+				crypto: tt.fields.crypto,
+			}
+			got := u.DeleteUser(tt.args.id)
+			assert.Equalf(t, tt.wantErr, got, "DeleteUser(%v)", tt.args.id)
 		})
 	}
 }
